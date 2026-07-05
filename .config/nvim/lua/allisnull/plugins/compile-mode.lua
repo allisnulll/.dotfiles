@@ -11,9 +11,9 @@ return {
             ask_about_save = false,
             ask_to_interrupt = false,
             auto_jump_to_first_error = true,
+            auto_scroll = false,
             baleia_setup = true,
             bang_expansion = true,
-            focus_compilation_buffer = true,
         }
 
         local compile_mode = require("compile-mode")
