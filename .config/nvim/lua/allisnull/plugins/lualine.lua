@@ -18,6 +18,7 @@ return {
 
         require("lualine").setup({
             options = { theme = "auto" },
+            extensions = { require("compile-mode.extensions.lualine") },
             sections = {
                 lualine_c = {
                     "filename",
