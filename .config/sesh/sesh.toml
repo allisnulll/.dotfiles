@@ -128,7 +128,17 @@ startup_command = "v zsh-undo-dir.plugin.zsh;c"
 [[session]]
 name = "🚀 HandmadeHero"
 path = "~/Programming/LearningCS/HandmadeHero/"
-startup_command = "v code/main.c '+vert Compile build/handmade';c"
+startup_command = "v code/main.c '+vert Compile ./build.sh && build/handmade';c"
+
+[[session]]
+name = "#[fg=#000050]#[fg=#000000] CodeCrafters Shell"
+path = "~/Programming/Tutorials/CodeCrafters/codecrafters-shell-c/"
+startup_command = "v src/main.c '+vert Compile ./build.sh && build/main';c"
+
+[[session]]
+name = "#[fg=#660606]󰟢#[fg=#000000] stnull"
+path = "~/Programming/Projects/stnull/"
+startup_command = "v test/main.c '+vert Compile ./build.sh && build/main';c"
 
 [[session]]
 name = "🧑🏽‍🌾 TheFarmerWasReplaced"
