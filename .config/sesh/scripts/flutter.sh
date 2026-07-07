@@ -3,7 +3,7 @@
 source ~/.zsh/config/function.zsh
 
 tmux new-window \;\
-     send-keys "c && git status" Enter \;\
+     send-keys "c;git status" Enter \;\
      new-window -n "log" \;\
      send-keys "c;adb logcat" Enter \;\
      split-window -h \;\
