@@ -5,7 +5,9 @@ source ~/.zsh/config/function.zsh
 tmux new-window \;\
      send-keys "c && git status" Enter \;\
      new-window -n "log" \;\
-     send-keys "c && adb logcat" Enter \;\
+     send-keys "c;adb logcat" Enter \;\
+     split-window -h \;\
+     send-keys "c;emu" Enter \;\
      new-window -n "run" \;\
 
 flw
