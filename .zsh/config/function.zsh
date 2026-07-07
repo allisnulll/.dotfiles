@@ -146,7 +146,7 @@ function flw() {
     if [ -e "./emulators_data" ]; then
         tmux split-window -h \;\
              send-keys 'pkill -f "firebase"' Enter \;\
-             send-keys "c && fle" Enter \;\
+             send-keys "c;fle" Enter \;\
              resize-pane -x 40% -t 1 \;\
              select-pane -t 0
     fi
@@ -166,7 +166,7 @@ function ftc() {
 
 function avd() {
     adb connect 192.168.1.215:5555 
-    tmux send-keys "c && adbr && flr --pid-file=/tmp/tf1.pid" Enter \;\
+    tmux send-keys "c;adbr && flr --pid-file=/tmp/tf1.pid" Enter \;\
          split-window -h \;\
          send-keys "scrcpy --max-size 1080" Enter \;\
          resize-pane -x 40% -t 1 \;\
@@ -175,7 +175,7 @@ function avd() {
 
 function wsa() {
     adb connect 192.168.1.215:58526 
-    tmux send-keys "c && adbr && flrw --pid-file=/tmp/tf1.pid" Enter \;\
+    tmux send-keys "c;adbr && flrw --pid-file=/tmp/tf1.pid" Enter \;\
          split-window -h \;\
          send-keys "scrcpy --crop 720:1346:1840:34 --max-size 1080" Enter \;\
          resize-pane -x 40% -t 1 \;\
