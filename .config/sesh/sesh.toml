@@ -5,13 +5,13 @@ path = "~"
 [[session]]
 name = "🗒️ Scratch"
 path = "~/Scratch"
-startup_command = "c && lsa"
+startup_command = "c;lsa"
 
 [[session]]
 name = "🛠️ Dotfiles"
 path = "~/.dotfiles"
 # startup_command = "v . '+Telescope find_files hidden=true'; clear"
-startup_command = "c && lsa && gs"
+startup_command = "c;lsa && gs"
 
 [[session]]
 name = "#[fg=#56bce1]#[fg=#000000] Hyprland"
@@ -67,12 +67,12 @@ startup_command = "vault;c"
 [[session]]
 name = " Trading"
 path = "~/Programming/Trading"
-startup_command = "conda activate quant && c && lsa"
+startup_command = "conda activate quant && c;lsa"
 
 [[session]]
 name = "📓 Notes"
 path = "~/Vault/notes"
-startup_command = "c && lst"
+startup_command = "c;lst"
 
 [[session]]
 name = "📥 Downloads"
@@ -117,7 +117,7 @@ startup_command = "v .;c"
 [[session]]
 name = "🔧 Settings"
 path = "~/Documents/Settings"
-startup_command = "c && lsa"
+startup_command = "c;lsa"
 
 # Projects
 [[session]]
@@ -148,7 +148,7 @@ startup_command = "v main.py '+lua vim.diagnostic.enable(false)' '+Telescope fin
 [[session]]
 name = "🧠 Brain"
 path = "~/Programming/Work/Brain"
-startup_command = "c && lsa"
+startup_command = "c;lsa"
 
 [[session]]
 name = "🧠 Brain Mobile"
