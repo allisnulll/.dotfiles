@@ -4,8 +4,8 @@ These are the dotfiles stowed on my Desktop & *Thinkpad T480s* Laptop
 ---
 I am running **Arch Linux** with the following technologies:
 - **NeoVim**
-    * [core](https://github.com/allisnulll/dotfiles/tree/main/.config/nvim/lua/allisnull/core)
-    * [plugins](https://github.com/allisnulll/dotfiles/tree/main/.config/nvim/lua/allisnull/plugins)
+    * [core](https://github.com/allisnulll/.dotfiles/tree/main/.config/nvim/lua/allisnull/core)
+    * [plugins](https://github.com/allisnulll/.dotfiles/tree/main/.config/nvim/lua/allisnull/plugins)
 - ***[Kanata](https://github.com/allisnulll/keyboard)*** to make the computer usable
 - **Zsh**
     * *[Zsh-Undo-Dir](https://github.com/allisnulll/zsh-undo-dir)* plugin I made
