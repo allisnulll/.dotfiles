@@ -139,7 +139,7 @@ function unz() {
 
 # Flutter
 function flw() {
-    tmux send-keys "c && adbr && flr --pid-file=/tmp/tf1.pid" Enter \;\
+    tmux send-keys "c;sleep 10 && adbr && flr --pid-file=/tmp/tf1.pid" Enter \;\
          split-window -v \;\
          send-keys 'npx -y nodemon -e dart -x "cat /tmp/tf1.pid | xargs kill -s USR1"' Enter \;\
          resize-pane -y 30% -t 1
