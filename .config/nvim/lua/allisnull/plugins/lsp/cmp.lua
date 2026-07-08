@@ -50,6 +50,7 @@ return {
                 ["<C-d>"] = cmp.mapping.scroll_docs(4),
                 ["<C-a>"] = cmp.mapping.abort(),
                 ["<CR>"] = cmp.mapping.confirm({ select = false }),
+                ["<C-p>"] = vim.g.neovide and vim.NIL or nil,
             }),
             sources = cmp.config.sources({
                 { name = "nvim_lsp" },
