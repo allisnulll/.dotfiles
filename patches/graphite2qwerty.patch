@@ -1,50 +1,55 @@
-diff --git a/.config/hypr/hyprland.conf b/.config/hypr/hyprland.conf
-index f19b894..48df2d2 100644
---- a/.config/hypr/hyprland.conf
-+++ b/.config/hypr/hyprland.conf
-@@ -282,24 +282,24 @@ bind = $mainMod CTRL, TAB, movegroupwindow
- bind = $mainMod CTRL SHIFT, TAB, movegroupwindow, b
+diff --git a/.config/hypr/hyprland.lua b/.config/hypr/hyprland.lua
+index 664eee7..302f5f0 100644
+--- a/.config/hypr/hyprland.lua
++++ b/.config/hypr/hyprland.lua
+@@ -367,25 +367,25 @@ hl.bind("SUPER + ALT + CTRL + up", hl.dsp.window.move({ direction = "u", group_a
+ hl.bind("SUPER + ALT + CTRL + down", hl.dsp.window.move({ direction = "d", group_aware = true }))
  
- # Conditional Keymaps:
--bind = $mainMod ALT, E, workspace, e+1
--bind = $mainMod ALT, Y, workspace, e-1
--bind = $mainMod ALT SHIFT, E, workspace, +1
--bind = $mainMod ALT SHIFT, Y, workspace, -1
--bind = $mainMod SHIFT, E, movetoworkspace, +1
--bind = $mainMod SHIFT, Y, movetoworkspace, -1
--bind = $mainMod CTRL, Y, resizeactive, -40 0
--bind = $mainMod CTRL, H, resizeactive, 0 40
--bind = $mainMod CTRL, A, resizeactive, 0 -40
--bind = $mainMod CTRL, E, resizeactive, 40 0
--bind = $mainMod SHIFT CTRL, Y, movewindow, l
--bind = $mainMod SHIFT CTRL, H, movewindow, d
--bind = $mainMod SHIFT CTRL, A, movewindow, u
--bind = $mainMod SHIFT CTRL, E, movewindow, r
--bind = $mainMod ALT CTRL, Y, movewindoworgroup, l
--bind = $mainMod ALT CTRL, H, movewindoworgroup, d
--bind = $mainMod ALT CTRL, A, movewindoworgroup, u
--bind = $mainMod ALT CTRL, E, movewindoworgroup, r
-+bind = $mainMod ALT, L,  workspace, e+1
-+bind = $mainMod ALT, H, workspace, e-1
-+bind = $mainMod ALT, SHIFT L,  workspace, +1
-+bind = $mainMod ALT, SHIFT H, workspace, -1
-+bind = $mainMod SHIFT, L,  movetoworkspace, +1
-+bind = $mainMod SHIFT, H, movetoworkspace, -1
-+bind = $mainMod CTRL, H, resizeactive, -40 0
-+bind = $mainMod CTRL, J, resizeactive, 0 40
-+bind = $mainMod CTRL, K,  resizeactive, 0 -40
-+bind = $mainMod CTRL, L,  resizeactive, 40 0
-+bind = $mainMod SHIFT CTRL, H, movewindow, l
-+bind = $mainMod SHIFT CTRL, J, movewindow, d
-+bind = $mainMod SHIFT CTRL, K,  movewindow, u
-+bind = $mainMod SHIFT CTRL, L,  movewindow, r
-+bind = $mainMod ALT CTRL, H, movewindoworgroup, l
-+bind = $mainMod ALT CTRL, J, movewindoworgroup, d
-+bind = $mainMod ALT CTRL, K,  movewindoworgroup, u
-+bind = $mainMod ALT CTRL, L,  movewindoworgroup, r
- 
- bindel = ,XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
- bindel = ,XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+ -- LAYOUT DEPENDENT
+-hl.bind("SUPER + Y", hl.dsp.focus({ direction = "left" }))
+-hl.bind("SUPER + E", hl.dsp.focus({ direction = "right" }))
+-hl.bind("SUPER + A", hl.dsp.focus({ direction = "up" }))
+-hl.bind("SUPER + H", hl.dsp.focus({ direction = "down" }))
+-hl.bind("SUPER + ALT + Y", hl.dsp.focus({ workspace = "e-1" }))
+-hl.bind("SUPER + ALT + E", hl.dsp.focus({ workspace = "e+1" }))
+-hl.bind("SUPER + ALT + SHIFT + Y", hl.dsp.window.move({ workspace = "-1" }))
+-hl.bind("SUPER + ALT + SHIFT + E", hl.dsp.window.move({ workspace = "+1" }))
+-hl.bind("SUPER + SHIFT + Y", hl.dsp.window.move({ workspace = "-1" }))
+-hl.bind("SUPER + SHIFT + E", hl.dsp.window.move({ workspace = "+1" }))
+-hl.bind("SUPER + CTRL + Y", hl.dsp.window.resize({ x = "-40", y = "0", relative = true }), { repeating = true })
+-hl.bind("SUPER + CTRL + E", hl.dsp.window.resize({ x = "40", y = "0", relative = true }), { repeating = true })
+-hl.bind("SUPER + CTRL + A", hl.dsp.window.resize({ x = "0", y = "-40", relative = true }), { repeating = true }) 
+-hl.bind("SUPER + CTRL + H", hl.dsp.window.resize({ x = "0", y = "40", relative = true}), { repeating = true })
+-hl.bind("SUPER + CTRL + SHIFT + Y", hl.dsp.window.move({ direction = "l" }))
+-hl.bind("SUPER + CTRL + SHIFT + E", hl.dsp.window.move({ direction = "r" }))
+-hl.bind("SUPER + CTRL + SHIFT + A", hl.dsp.window.move({ direction = "u" }))
+-hl.bind("SUPER + CTRL + SHIFT + H", hl.dsp.window.move({ direction = "d" }))
+-hl.bind("SUPER + ALT + CTRL + Y", hl.dsp.window.move({ direction = "l", group_aware = true }))
+-hl.bind("SUPER + ALT + CTRL + E", hl.dsp.window.move({ direction = "r", group_aware = true }))
+-hl.bind("SUPER + ALT + CTRL + A", hl.dsp.window.move({ direction = "u", group_aware = true }))
+-hl.bind("SUPER + ALT + CTRL + H", hl.dsp.window.move({ direction = "d", group_aware = true }))
++hl.bind("SUPER + H", hl.dsp.focus({ direction = "left" }))
++hl.bind("SUPER + L", hl.dsp.focus({ direction = "right" }))
++hl.bind("SUPER + K", hl.dsp.focus({ direction = "up" }))
++hl.bind("SUPER + J", hl.dsp.focus({ direction = "down" }))
++hl.bind("SUPER + ALT + H", hl.dsp.focus({ workspace = "e-1" }))
++hl.bind("SUPER + ALT + L", hl.dsp.focus({ workspace = "e+1" }))
++hl.bind("SUPER + ALT + SHIFT + H", hl.dsp.window.move({ workspace = "-1" }))
++hl.bind("SUPER + ALT + SHIFT + L", hl.dsp.window.move({ workspace = "+1" }))
++hl.bind("SUPER + SHIFT + H", hl.dsp.window.move({ workspace = "-1" }))
++hl.bind("SUPER + SHIFT + L", hl.dsp.window.move({ workspace = "+1" }))
++hl.bind("SUPER + CTRL + H", hl.dsp.window.resize({ x = "-40", y = "0", relative = true }), { repeating = true })
++hl.bind("SUPER + CTRL + L", hl.dsp.window.resize({ x = "40", y = "0", relative = true }), { repeating = true })
++hl.bind("SUPER + CTRL + K", hl.dsp.window.resize({ x = "0", y = "-40", relative = true }), { repeating = true })
++hl.bind("SUPER + CTRL + J", hl.dsp.window.resize({ x = "0", y = "40", relative = true }), { repeating = true })
++hl.bind("SUPER + CTRL + SHIFT + H", hl.dsp.window.move({ direction = "l" }))
++hl.bind("SUPER + CTRL + SHIFT + L", hl.dsp.window.move({ direction = "r" }))
++hl.bind("SUPER + CTRL + SHIFT + K", hl.dsp.window.move({ direction = "u" }))
++hl.bind("SUPER + CTRL + SHIFT + J", hl.dsp.window.move({ direction = "d" }))
++hl.bind("SUPER + ALT + CTRL + H", hl.dsp.window.move({ direction = "l", group_aware = true }))
++hl.bind("SUPER + ALT + CTRL + L", hl.dsp.window.move({ direction = "r", group_aware = true }))
++hl.bind("SUPER + ALT + CTRL + K", hl.dsp.window.move({ direction = "u", group_aware = true }))
++hl.bind("SUPER + ALT + CTRL + J", hl.dsp.window.move({ direction = "d", group_aware = true }))
 diff --git a/.config/rofi/bluetooth-menu.rasi b/.config/rofi/bluetooth-menu.rasi
 index faa90bb..7fc25cd 100644
 --- a/.config/rofi/bluetooth-menu.rasi
@@ -134,12 +139,12 @@ index 15f9085..2dcef9b 100644
      kb-page-next: "Page_Down,Ctrl+d";
      kb-page-prev: "Page_Up,Ctrl+u";
 diff --git a/.tmux.conf b/.tmux.conf
-index 2fcf4ba..52a8d61 100644
+index 0fcb87f..654cc38 100644
 --- a/.tmux.conf
 +++ b/.tmux.conf
-@@ -40,20 +40,20 @@ bind -n C-M-Right swap-window -t +1 \; next-window
- bind -n M-S-Down switch-client -n
- bind -n M-S-Up switch-client -p
+@@ -41,20 +41,20 @@ bind -n C-M-Right swap-window -t +1 \; next-window
+ bind -n M-S-Down run-shell "~/.dotfiles/scripts/switch-session.sh n"
+ bind -n M-S-Up run-shell "~/.dotfiles/scripts/switch-session.sh p"
  
 -unbind -n M-L
 -unbind -n C-M-h
@@ -151,8 +156,8 @@ index 2fcf4ba..52a8d61 100644
 -bind -n M-E next-window
 -bind -n C-M-y swap-window -t -1 \; previous-window
 -bind -n C-M-e swap-window -t +1 \; next-window
--bind -n M-H switch-client -n
--bind -n M-A switch-client -p
+-bind -n M-H run-shell "~/.dotfiles/scripts/switch-session.sh n"
+-bind -n M-A run-shell "~/.dotfiles/scripts/switch-session.sh p"
 -bind -n M-I switch-client -l
 -bind -n M-: last-window
 +unbind -n M-Y
@@ -166,8 +171,8 @@ index 2fcf4ba..52a8d61 100644
 +bind -n C-M-h swap-window -t -1 \; previous-window
 +bind -n C-M-l swap-window -t +1 \; next-window
 +bind -n M-J switch-client -n
-+bind -n M-K switch-client -p
-+bind -n M-: switch-client -l
++bind -n M-K run-shell "~/.dotfiles/scripts/switch-session.sh n"
++bind -n M-: run-shell "~/.dotfiles/scripts/switch-session.sh p"
 +bind -n M-\" last-window
  
  bind-key x kill-pane
