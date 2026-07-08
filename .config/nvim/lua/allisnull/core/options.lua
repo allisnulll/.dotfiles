@@ -66,8 +66,7 @@ vim.g["conjure#highlight#enabled"] = true
 
 if vim.g.neovide then
     vim.keymap.set({ "n", "v" }, "<C-p>", '"+p', { desc = "Paste" })
-    -- vim.keymap.set({ "c", "i" }, "<C-p>", "<C-r>+", { desc = "Paste" }) -- TODO: Figure out how to map <C-p> in insert mode without being overriden by completions system
-    vim.keymap.set("c", "<C-p>", "<C-r>+", { desc = "Paste" })
+    vim.keymap.set({ "c", "i" }, "<C-p>", "<C-r>+", { desc = "Paste" })
 
     vim.g.neovide_padding_top = 8
     vim.g.neovide_padding_bottom = 8
