@@ -10,6 +10,4 @@ else
 fi
 
 tmux source-file "$HOME/.tmux.conf" && tmux display-message "Config reloaded!"
-
-sleep 1
 hyprctl reload
