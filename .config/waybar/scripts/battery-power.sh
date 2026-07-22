@@ -3,29 +3,68 @@
 BAT_PATH=$(upower -e 2>/dev/null | grep BAT | head -n 1)
 
 if [ -n "$BAT_PATH" ]; then
-    STATE=$(upower -i "$BAT_PATH" | awk '/state:/ {print $2}')
-    LEVEL=$(upower -i "$BAT_PATH" | awk '/percentage:/ {print $2}' | tr -d '%')
+    INFO=$(upower -i "$BAT_PATH")
+    STATE=$(echo "$INFO" | awk '/state:/ {print $2}')
+    LEVEL=$(echo "$INFO" | awk '/percentage:/ {print $2}' | tr -d '%')
+    ENERGY=$(echo "$INFO" | awk '/^\s*energy:/ {print $2}')
+    ENERGY_FULL=$(echo "$INFO" | awk '/^\s*energy-full:/ {print $2}')
+    RATE=$(echo "$INFO" | awk '/energy-rate:/ {print $2}')
 
     ICONS=("󰂎" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹")
 
-    if [ "$STATE" = "charging" ] || [ "$STATE" = "fully-charged" ]; then
-        CLASS="charging"
-        TEXT=" ${LEVEL}%"
-        TOOLTIP="Charging"
-    else
-        if [ "$LEVEL" -le 10 ]; then
-            CLASS="critical"
-        elif [ "$LEVEL" -le 20 ]; then
-            CLASS="warning"
-        else
-            CLASS="discharging"
-        fi
+    time_to_hm() {
+        awk "BEGIN{
+            h=int($1);
+            m=int(($1-h)*60);
+            printf \"%d h %d min\", h, m
+        }"
+    }
 
-        IDX=$((LEVEL / 10))
-        [ "$IDX" -gt 9 ] && IDX=9
-        TEXT="${ICONS[$IDX]} ${LEVEL}%"
-        TOOLTIP="Discharging"
-    fi
+    case "$STATE" in
+        fully-charged)
+            CLASS="charging"
+            TEXT=" ${LEVEL}%"
+            TOOLTIP="Full"
+            ;;
+        charging)
+            CLASS="charging"
+            TEXT=" ${LEVEL}%"
+            if [ -n "$RATE" ] && [ -n "$ENERGY_FULL" ] && [ -n "$ENERGY" ] \
+               && awk "BEGIN{exit !($RATE>0)}"; then
+                HOURS=$(awk "BEGIN{printf \"%.4f\", ($ENERGY_FULL-$ENERGY)/$RATE}")
+                TOOLTIP=$(time_to_hm "$HOURS")
+            else
+                TOOLTIP="Full"
+            fi
+            ;;
+        discharging|pending-discharge)
+            if [ "$LEVEL" -le 10 ]; then
+                CLASS="critical"
+            elif [ "$LEVEL" -le 20 ]; then
+                CLASS="warning"
+            else
+                CLASS="discharging"
+            fi
+
+            IDX=$((LEVEL / 10))
+            [ "$IDX" -gt 9 ] && IDX=9
+            TEXT="${ICONS[$IDX]} ${LEVEL}%"
+            if [ -n "$RATE" ] && [ -n "$ENERGY" ] \
+               && awk "BEGIN{exit !($RATE>0)}"; then
+                HOURS=$(awk "BEGIN{printf \"%.4f\", $ENERGY/$RATE}")
+                TOOLTIP=$(time_to_hm "$HOURS")
+            elif [ "$LEVEL" -le 0 ]; then
+                TOOLTIP="Empty"
+            else
+                TOOLTIP="Discharging"
+            fi
+            ;;
+        *)
+            CLASS="discharging"
+            TEXT="${ICONS[0]} ${LEVEL}%"
+            TOOLTIP="Discharging"
+            ;;
+    esac
 
     printf '{"text":"%s","tooltip":"%s","class":"%s"}' "$TEXT" "$TOOLTIP" "$CLASS"
 else
