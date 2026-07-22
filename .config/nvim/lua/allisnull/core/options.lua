@@ -67,6 +67,9 @@ vim.g["conjure#highlight#enabled"] = true
 if vim.g.neovide then
     vim.keymap.set({ "n", "v" }, "<C-p>", '"+p', { desc = "Paste" })
     vim.keymap.set({ "c", "i" }, "<C-p>", "<C-r>+", { desc = "Paste" })
+    vim.keymap.set("n", "<F11>", function()
+        vim.g.neovide_fullscreen = not vim.g.neovide_fullscreen
+    end, { desc = "Toggle Neovide fullscreen" })
 
     vim.g.neovide_padding_top = 8
     vim.g.neovide_padding_bottom = 8
