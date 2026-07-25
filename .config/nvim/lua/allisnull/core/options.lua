@@ -62,6 +62,8 @@ vim.g.netrw_winsize = 25
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
+vim.g.easy_align_ignore_groups = {}
+
 vim.g["conjure#highlight#enabled"] = true
 
 if vim.g.neovide then
