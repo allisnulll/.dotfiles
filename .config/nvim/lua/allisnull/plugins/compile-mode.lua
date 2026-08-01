@@ -18,10 +18,26 @@ return {
 
         local compile_mode = require("compile-mode")
 
+        local function find_build_exec()
+            local handle = vim.uv.fs_scandir("build")
+            if not handle then return nil end
+
+            while true do
+                local name, type = vim.uv.fs_scandir_next(handle)
+                if not name then break end
+                if type == "file" and vim.uv.fs_access("build/" .. name, "X") then
+                    return "build/" .. name
+                end
+            end
+
+            return nil
+        end
+
         vim.keymap.set("n", "<F5>", function()
+            local fallback = "build/" .. vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":t:r")
             vim.ui.input({
                 prompt = "Compile command: ",
-                default = "./build.sh && build/" .. vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":t:r")
+                default = "./build.sh && " .. (find_build_exec() or fallback)
             }, function(command)
                 if command and command ~= "" then
                     vim.cmd("vert Compile " .. command)
