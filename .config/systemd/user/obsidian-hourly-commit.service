@@ -1,0 +1,6 @@
+[Unit]
+Description=Hourly Obsidian Commit
+
+[Service]
+Type=simple
+ExecStart=%h/.dotfiles/scripts/obsidian_commit.sh
