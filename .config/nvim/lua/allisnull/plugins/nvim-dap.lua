@@ -6,16 +6,16 @@ return {
     },
     keys = {
         { "<M-d><M-d>", ":DapViewToggle<CR>", { desc = "DapViewToggle" }},
-        { "<M-d>b", ":DapToggleBreakpoint<CR>", { desc = "DapToggleBreakpoint" }},
+        { "<F9>", ":DapStepInto<CR>", { desc = "DapStepInto" }},
+        { "<F8>", ":DapStepOver<CR>", { desc = "DapStepOver" }},
+        { "<F7>", ":DapStepOut<CR>", { desc = "DapStepOut" }},
         { "<M-d>c", ":DapContinue<CR>", { desc = "DapContinue" }},
+        { "<M-d>b", ":DapToggleBreakpoint<CR>", { desc = "DapToggleBreakpoint" }},
         { "<M-d>w", function()
             vim.ui.input({ prompt = "DapViewWatch: " }, function(command)
                 vim.fn.feedkeys(":DapViewWatch " .. command .. "\r")
             end)
         end, { desc = "DapViewWatch" }},
-        { "<M-d>s", ":DapStepOver<CR>", { desc = "DapStepOver" }},
-        { "<M-d>i", ":DapStepInto<CR>", { desc = "DapStepInto" }},
-        { "<M-d>o", ":DapStepOut<CR>", { desc = "DapStepOut" }},
         { "<M-d>p", ":DapStepPause<CR>", { desc = "DapStepPause" }},
         { "<M-d>k", ":DapTerminate<CR>", { desc = "DapTerminate" }},
     },
