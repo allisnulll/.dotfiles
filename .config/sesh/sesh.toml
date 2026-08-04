@@ -133,7 +133,7 @@ startup_command = "v test/main.c '+vert Compile ./build.sh && build/main';c"
 [[session]]
 name = "🚀 HandmadeHero"
 path = "~/Programming/LearningCS/HandmadeHero"
-startup_command = "v code/main.c '+vert Compile ./build.sh && build/handmade';c"
+startup_command = "v src/main.c '+vert Compile ./build.sh && build/handmade';c"
 
 [[session]]
 name = "#[fg=#000050]#[fg=#000000] CodeCrafters Shell"
