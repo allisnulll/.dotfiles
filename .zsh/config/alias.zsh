@@ -116,11 +116,11 @@ alias adbr="adb shell settings put system user_rotation 0"
 alias dk="sudo systemctl start docker"
 
 # Kanata
-alias kn="kanata -c ~/kanata/kanata.kbd --log-layer-changes"
-alias knd="kanata -dc ~/kanata/kanata.kbd --log-layer-changes"
+alias kn="kanata --log-layer-changes"
 alias kns="systemctl --user stop kanata"
 alias knl="systemctl --user status kanata"
 alias knr="systemctl --user daemon-reload && systemctl --user restart kanata"
+alias g2q="~/.dotfiles/scripts/data-stream.sh"
 
 # GhostScript
 alias rd="\\gs"
