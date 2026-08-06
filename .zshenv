@@ -23,6 +23,9 @@ export LESS_TERMCAP_ZV=$'\e[75m'
 export LESS_TERMCAP_ZO=$'\e[73m'
 export LESS_TERMCAP_ZW=$'\e[75m'
 
+# AdressSanitizer
+export ASAN_OPTIONS=hard_rss_limit_mb=1024
+
 # Python
 export CONDA_PLUGINS_AUTO_ACCEPT_TOS=true
 export PYENV_ROOT="$HOME/.pyenv"
