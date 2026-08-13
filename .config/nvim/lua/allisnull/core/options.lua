@@ -69,16 +69,53 @@ vim.g["conjure#highlight#enabled"] = true
 if vim.g.neovide then
     vim.keymap.set({ "n", "v" }, "<C-p>", '"+p', { desc = "Paste" })
     vim.keymap.set({ "c", "i" }, "<C-p>", "<C-r>+", { desc = "Paste" })
+
     vim.keymap.set("n", "<F11>", function()
         vim.g.neovide_fullscreen = not vim.g.neovide_fullscreen
     end, { desc = "Toggle Neovide fullscreen" })
+
+    vim.o.guifont = "Maple Mono NF:h12"
+    vim.keymap.set({ "n", "i" }, "<C-->", function()
+        if vim.o.guifont ~= nil then
+            local font_size = tonumber(vim.o.guifont:match("%d+$"))
+            font_size = math.max(0, font_size - 1)
+            vim.o.guifont = "Maple Mono NF:h" .. tostring(font_size)
+            print(font_size)
+        else
+            vim.o.guifont = "Maple Mono NF:h12"
+        end
+    end, { desc = "Decrease Font Size" })
+    vim.keymap.set({ "n", "i" }, "<C-=>", function()
+        if vim.o.guifont ~= nil then
+            local font_size = tonumber(vim.o.guifont:match("%d+$"))
+            font_size = font_size + 1
+            vim.o.guifont = "Maple Mono NF:h" .. tostring(font_size)
+            print(font_size)
+        else
+            vim.o.guifont = "Maple Mono NF:h12"
+        end
+    end, { desc = "Increase Font Size" })
+
+    vim.g.neovide_opacity = 0.75
+    vim.keymap.set({ "n", "i" }, "<M-->", function()
+        if vim.g.neovide_opacity ~= nil then
+            vim.g.neovide_opacity = math.max(0, vim.g.neovide_opacity - 0.05)
+        else
+            vim.g.neovide_opacity = 0.75
+        end
+    end, { desc = "Lower Opacity" })
+    vim.keymap.set({ "n", "i" }, "<M-=>", function()
+        if vim.g.neovide_opacity ~= nil then
+            vim.g.neovide_opacity = math.min(1, vim.g.neovide_opacity + 0.05)
+        else
+            vim.g.neovide_opacity = 0.75
+        end
+    end, { desc = "Raise Opacity" })
 
     vim.g.neovide_padding_top = 8
     vim.g.neovide_padding_bottom = 8
     vim.g.neovide_padding_right = 8
     vim.g.neovide_padding_left = 8
-    vim.g.neovide_opacity = 0.75
-    vim.o.guifont = "Maple Mono NF:h12"
     vim.g.neovide_refresh_rate = 144
     vim.g.neovide_cursor_animation_length = 0.04
     vim.g.neovide_cursor_trail_size = 0.7
