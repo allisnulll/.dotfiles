@@ -31,9 +31,15 @@ local function ai_buffer(ai_type)
     }
 end
 
--- TODO: ai_search
--- local function ai_search(ai_type)
--- end
+local function ai_search(_)
+    local start_pos = vim.fn.searchpos(vim.fn.getreg("/"), "bcW")
+    local end_pos = vim.fn.searchpos(vim.fn.getreg("/"), "cenW")
+
+    return {
+        from = { line = start_pos[1], col = start_pos[2] },
+        to = { line = end_pos[1], col = end_pos[2] },
+    }
+end
 
 return {
     "echasnovski/mini.ai",
@@ -44,9 +50,9 @@ return {
         return {
             n_lines = 500,
             custom_textobjects = {
-                -- ["/"] = ai_search,
                 g = ai_buffer,
                 l = ai_line,
+                ["/"] = ai_search,
 
                 -- TODO: Figure out ai objects
                 F = spec_treesitter({ a = "@function.outer", i = "@function.inner" }),
