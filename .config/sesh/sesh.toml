@@ -127,7 +127,7 @@ startup_command = "v zsh-undo-dir.plugin.zsh;c"
 
 [[session]]
 name = "#[fg=#e0af68]󰓱#[fg=#000000] Sudoku"
-path = "~/Programming/Projects/Sudoku"
+path = "~/Programming/Projects/sudoku-solver"
 startup_command = "v test/main.c '+vert Compile ./build.sh && build/main';c"
 
 [[session]]
