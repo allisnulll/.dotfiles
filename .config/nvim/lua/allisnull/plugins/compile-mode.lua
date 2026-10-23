@@ -12,7 +12,7 @@ return {
             ask_to_interrupt = false,
             auto_jump_to_first_error = true,
             auto_scroll = false,
-            baleia_setup = true,
+            ansi_color = { kind = "render" },
             bang_expansion = true,
         }
 
