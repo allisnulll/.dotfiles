@@ -1,12 +1,16 @@
 [Unit]
-Description=Unlock GNOME Keyring
-After=graphical-session.target
+Description=Unlock the GNOME login keyring
+# Run after the distro daemon and unlock that same daemon over its control
+# socket. Do not start a second daemon: the one owning org.freedesktop.secrets
+# is the one that must be unlocked.
+After=gnome-keyring-daemon.service
+Wants=gnome-keyring-daemon.service
+PartOf=gnome-keyring-daemon.service
 
 [Service]
 Type=oneshot
-ExecStart=%h/.config/unlock-keyring.sh
-RemainAfterExit=true
-Environment=DISPLAY=:0
+RemainAfterExit=yes
+ExecStart=%h/.dotfiles/scripts/unlock-keyring.sh
 Environment=XDG_RUNTIME_DIR=/run/user/%U
 
 [Install]
