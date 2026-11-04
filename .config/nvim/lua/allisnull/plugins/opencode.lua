@@ -1,5 +1,6 @@
 return {
     "NickvanDyke/opencode.nvim",
+    version = "1.*",
     dependencies = { "nvim-telescope/telescope.nvim" },
     config = function()
         local started = false
