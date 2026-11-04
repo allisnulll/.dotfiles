@@ -236,6 +236,9 @@ local function visual_macro(letter)
 end
 
 -- Preferences
+vim.keymap.set("n", "<S-Down>", "gj", { desc = "Display line down" })
+vim.keymap.set("n", "<S-Up>", "gk", { desc = "Display line up" })
+
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Half page down" })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Half page up" })
 vim.keymap.set("n", "n", "nzzzv", { desc = 'Repeat the latest "/" or "?"' })
