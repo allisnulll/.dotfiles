@@ -22,7 +22,6 @@ local pickText = "grimblast --freeze save area /tmp/ocr.png && tesseract /tmp/oc
 local paper = "~/.config/hypr/scripts/hyprpaper.sh"
 local defaultPaper = "~/.config/hypr/scripts/hyprpaper.sh default"
 local dataStream = "~/.dotfiles/scripts/data-stream.sh"
-local bar = "pkill -x -SIGUSR1 waybar"
 -- TODO: Fix smart gaps and opacity scripts
 -- local gaps = "~/.config/hypr/scripts/toggle-smart-gaps.sh"
 -- local opacity = "~/.config/hypr/scripts/opacity-control.sh"
@@ -292,7 +291,23 @@ hl.bind("SUPER + W", hl.dsp.exec_cmd(paper))
 hl.bind("SUPER + CTRL + W", hl.dsp.exec_cmd(defaultPaper))
 hl.bind("SUPER + SHIFT + W", hl.dsp.exec_cmd(dataStream))
 
-hl.bind("SUPER + B", hl.dsp.exec_cmd(bar))
+local waybar_disabled_workspaces = {}
+hl.bind("SUPER + B", function()
+    local ws = hl.get_active_workspace().name
+    if waybar_disabled_workspaces[ws] then
+        waybar_disabled_workspaces[ws] = nil
+    else
+        waybar_disabled_workspaces[ws] = true
+    end
+
+    hl.exec_cmd("pkill -x -SIGUSR1 waybar")
+end)
+hl.on("workspace.active", function(ws)
+    local last_ws = hl.get_last_workspace().name
+    if waybar_disabled_workspaces[ws.name] ~= waybar_disabled_workspaces[last_ws] then
+        hl.exec_cmd("pkill -x -SIGUSR1 waybar")
+    end
+end)
 
 -- TODO: Fix smart gaps and opacity scripts
 -- hl.bind("SUPER + G", hl.dsp.exec_cmd(gaps))
