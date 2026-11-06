@@ -500,5 +500,4 @@ require("render-markdown").setup({
 vim.keymap.set("n", "<leader>md", ":RenderMarkdown toggle<CR>", { desc = "Toggle RenderMarkdown" })
 
 -- Markdown Preview
-vim.g.mkdp_filetypes = { "markdown" }
 vim.keymap.set("n", "<leader>mp", ":MarkdownPreviewToggle<CR>", { desc = "Toggle MarkdownPreview" })
