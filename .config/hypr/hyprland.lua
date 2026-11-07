@@ -60,16 +60,28 @@ hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
 
 hl.monitor({ output = "", mode = "highres", position = "auto", scale = "auto" })
 
-hl.workspace_rule({ workspace = "1", monitor = "DP-1", default = true })
-hl.workspace_rule({ workspace = "2", monitor = "DP-1" })
-hl.workspace_rule({ workspace = "3", monitor = "DP-1" })
-hl.workspace_rule({ workspace = "4", monitor = "DP-1" })
-hl.workspace_rule({ workspace = "5", monitor = "DP-1" })
-hl.workspace_rule({ workspace = "6", monitor = "HDMI-A-1", default = true })
-hl.workspace_rule({ workspace = "7", monitor = "HDMI-A-1" })
-hl.workspace_rule({ workspace = "8", monitor = "HDMI-A-1" })
-hl.workspace_rule({ workspace = "9", monitor = "HDMI-A-1" })
-hl.workspace_rule({ workspace = "0", monitor = "HDMI-A-1" })
+local function set_workspaces()
+    local monitors = hl.get_monitors()
+    if #monitors == 0 then return end
+
+    if #monitors > 1 then
+        table.sort(monitors, function(m1, m2)
+            return m1.id < m2.id
+        end)
+
+        for m = 1, #monitors do
+            for i = 1, 5 do
+                hl.workspace_rule({ workspace = tostring((m-1)*5 + i), monitor = monitors[m].name, default = i == 1 })
+            end
+        end
+    else
+        for i = 1, 10 do
+            hl.workspace_rule({ workspace = tostring(i), monitor = monitors[1].name, default = i == 1 })
+        end
+    end
+end
+hl.on("monitor.layout_changed", set_workspaces)
+set_workspaces()
 
 hl.config({
     general = {
