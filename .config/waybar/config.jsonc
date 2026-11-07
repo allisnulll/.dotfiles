@@ -4,6 +4,8 @@
     "mode": "dock",
     "reload_style_on_change": true,
     "gtk-layer-shell": true,
+    "on-sigusr1": "hide",
+    "on-sigusr2": "show",
 
     // <<--< Positions >-->>
 
