@@ -133,6 +133,10 @@ hl.config({
         animate_manual_resizes = true,
     },
 
+    debug = {
+        enable_stdout_logs = true,
+    },
+
     input = {
         kb_layout = "us",
         kb_variant = "",
