@@ -296,21 +296,32 @@ hl.bind("SUPER + CTRL + W", hl.dsp.exec_cmd(defaultPaper))
 hl.bind("SUPER + SHIFT + W", hl.dsp.exec_cmd(dataStream))
 
 local waybar_disabled_workspaces = {}
-hl.bind("SUPER + B", function()
-    local ws = hl.get_active_workspace().name
-    if waybar_disabled_workspaces[ws] then
-        waybar_disabled_workspaces[ws] = nil
+local function apply_waybar_visibility(ws)
+    if ws == nil then return end
+
+    if waybar_disabled_workspaces[ws.name] then
+        hl.exec_cmd("pkill -x -SIGUSR1 waybar")
     else
-        waybar_disabled_workspaces[ws] = true
+        hl.exec_cmd("pkill -x -SIGUSR2 waybar")
+    end
+end
+hl.on("workspace.active", function(ws)
+    apply_waybar_visibility(ws)
+end)
+hl.bind("SUPER + B", function()
+    local ws = hl.get_active_workspace()
+    if ws == nil then
+        hl.notification.create({ text = "Hyprland: Error getting active workspace", timeout = 5000, icon = "error", font_size = 20, })
+        return
     end
 
-    hl.exec_cmd("pkill -x -SIGUSR1 waybar")
-end)
-hl.on("workspace.active", function(ws)
-    local last_ws = hl.get_last_workspace().name
-    if waybar_disabled_workspaces[ws.name] ~= waybar_disabled_workspaces[last_ws] then
-        hl.exec_cmd("pkill -x -SIGUSR1 waybar")
+    if waybar_disabled_workspaces[ws.name] then
+        waybar_disabled_workspaces[ws.name] = nil
+    else
+        waybar_disabled_workspaces[ws.name] = true
     end
+
+    apply_waybar_visibility(ws)
 end)
 
 -- TODO: Fix smart gaps and opacity scripts
