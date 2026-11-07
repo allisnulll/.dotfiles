@@ -91,7 +91,7 @@ eval "$(zoxide init --cmd cd zsh)"
 # Hyprctl
 alias hctl="hyprctl"
 alias hr="hyprctl reload"
-alias hR="hyprctl dispatch exit"
+alias hR="hyprctl dispatch 'hl.dsp.exit()'"
 
 # Unzip
 alias unzipa="for f in *.zip; do unzip '$f' -d '${f%.zip}'; done"
