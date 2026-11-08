@@ -18,6 +18,7 @@ return {
                 vim.fn.system("tmux set status off")
                 vim.fn.system('tmux list-panes -F "\\#F" | grep -q Z || tmux resize-pane -Z')
                 vim.fn.system("kitten @ set-font-size +2")
+                vim.fn.feedkeys("zt")
                 vim.diagnostic.enable(false)
             end,
 
