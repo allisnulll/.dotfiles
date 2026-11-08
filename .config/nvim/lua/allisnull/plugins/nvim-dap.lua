@@ -20,7 +20,7 @@ return {
         { "<M-d>k", ":DapTerminate<CR>", { desc = "DapTerminate" }},
     },
     config = function()
-        require("nvim-dap-virtual-text").setup()
+        require("nvim-dap-virtual-text").setup({})
 
         local dap = require("dap")
 
@@ -31,89 +31,134 @@ return {
             end)
         end, { desc = "DapSetConditionalBreakpoint" });
 
-        dap.adapters.gdb = {
-            type = "executable",
-            command = "gdb",
-            args = { "--interpreter=dap", "--eval-command", "set print pretty on" }
-        }
-        dap.configurations.c = {
-            {
-                name = "Launch",
-                type = "gdb",
-                request = "launch",
-                program = function()
-                    return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-                end,
-                args = {},
-                cwd = "${workspaceFolder}",
-                stopAtBeginningOfMainSubprogram = false,
+        dap.adapters = {
+            gdb = {
+                type = "executable",
+                command = "gdb",
+                args = { "--interpreter=dap", "--eval-command", "set print pretty on" }
             },
-            {
-                name = "Select and attach to process",
-                type = "gdb",
-                request = "attach",
-                program = function()
-                    return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-                end,
-                pid = function()
-                    local name = vim.fn.input("Executable name (filter): ")
-                    return require("dap.utils").pick_process({ filter = name })
-                end,
-                cwd = "${workspaceFolder}"
+            delve = function(callback, config)
+                if config.mode == "remote" and config.request == "attach" then
+                    callback({
+                        type = "server",
+                        host = config.host or "127.0.0.1",
+                        port = config.port or "38697"
+                    })
+                else
+                    callback({
+                        type = "server",
+                        port = "${port}",
+                        executable = {
+                            command = "dlv",
+                            args = { "dap", "-l", "127.0.0.1:${port}", "--log", "--log-output=dap" },
+                            detached = vim.fn.has("win32") == 0,
+                        }
+                    })
+                end
+            end,
+            ["rust-gdb"] = {
+                type = "executable",
+                command = "rust-gdb",
+                args = { "--interpreter=dap", "--eval-command", "set print pretty on" }
             },
-            {
-                name = "Attach to gdbserver :1234",
-                type = "gdb",
-                request = "attach",
-                target = "localhost:1234",
-                program = function()
-                    return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-                end,
-                cwd = "${workspaceFolder}"
-            }
         }
-        dap.configurations.cpp = dap.configurations.c
 
-        dap.adapters["rust-gdb"] = {
-            type = "executable",
-            command = "rust-gdb",
-            args = { "--interpreter=dap", "--eval-command", "set print pretty on" }
-        }
-        dap.configurations.rust = {
-            {
-                name = "Launch",
-                type = "rust-gdb",
-                request = "launch",
-                program = function()
-                    return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-                end,
-                args = {}, -- provide arguments if needed
-                cwd = "${workspaceFolder}",
-                stopAtBeginningOfMainSubprogram = false,
+        dap.configurations = {
+            c = {
+                {
+                    name = "Launch",
+                    type = "gdb",
+                    request = "launch",
+                    program = function()
+                        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+                    end,
+                    args = {},
+                    cwd = "${workspaceFolder}",
+                    stopAtBeginningOfMainSubprogram = false,
+                },
+                {
+                    name = "Select and attach to process",
+                    type = "gdb",
+                    request = "attach",
+                    program = function()
+                        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+                    end,
+                    pid = function()
+                        local name = vim.fn.input("Executable name (filter): ")
+                        return require("dap.utils").pick_process({ filter = name })
+                    end,
+                    cwd = "${workspaceFolder}"
+                },
+                {
+                    name = "Attach to gdbserver :1234",
+                    type = "gdb",
+                    request = "attach",
+                    target = "localhost:1234",
+                    program = function()
+                        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+                    end,
+                    cwd = "${workspaceFolder}"
+                },
             },
-            {
-                name = "Select and attach to process",
-                type = "rust-gdb",
-                request = "attach",
-                program = function()
-                    return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-                end,
-                pid = function()
-                    local name = vim.fn.input("Executable name (filter): ")
-                    return require("dap.utils").pick_process({ filter = name })
-                end,
-                cwd = "${workspaceFolder}"
+            cpp = dap.configurations.c,
+            go = {
+                {
+                    type = "delve",
+                    name = "Debug",
+                    request = "launch",
+                    program = "${file}"
+                },
+                {
+                    type = "delve",
+                    name = "Debug test",
+                    request = "launch",
+                    mode = "test",
+                    program = "${file}"
+                },
+                {
+                    type = "delve",
+                    name = "Debug test (go.mod)",
+                    request = "launch",
+                    mode = "test",
+                    program = "./${relativeFileDirname}"
+                },
             },
-            {
-                name = "Attach to gdbserver :1234",
-                type = "rust-gdb",
-                request = "attach",
-                target = "localhost:1234",
-                program = function()
-                    return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-                end,
-                cwd = "${workspaceFolder}"
-            }
+            rust = {
+                {
+                    name = "Launch",
+                    type = "rust-gdb",
+                    request = "launch",
+                    program = function()
+                        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+                    end,
+                    args = {},
+                    cwd = "${workspaceFolder}",
+                    stopAtBeginningOfMainSubprogram = false,
+                },
+                {
+                    name = "Select and attach to process",
+                    type = "rust-gdb",
+                    request = "attach",
+                    program = function()
+                        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+                    end,
+                    pid = function()
+                        local name = vim.fn.input("Executable name (filter): ")
+                        return require("dap.utils").pick_process({ filter = name })
+                    end,
+                    cwd = "${workspaceFolder}"
+                },
+                {
+                    name = "Attach to gdbserver :1234",
+                    type = "rust-gdb",
+                    request = "attach",
+                    target = "localhost:1234",
+                    program = function()
+                        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+                    end,
+                    cwd = "${workspaceFolder}"
+                },
+            },
         }
     end,
 }
