@@ -212,6 +212,16 @@ hl.config({
     }
 })
 
+hl.on("window.open", function(w)
+    local is_extension = w.class:match("^chrome%-")
+        or w.class:match("^chromium%-.*%-")
+    if not is_extension then return end
+
+    hl.dispatch(hl.dsp.window.float({ action = "set", window = w }))
+    hl.dispatch(hl.dsp.window.center({ window = w }))
+    hl.dispatch(hl.dsp.focus({ window = w }))
+end)
+
 hl.curve("easeOutQuint", { type = "bezier", points = { {0.23, 1}, {0.32, 1} } })
 hl.curve("easeInOutCubic", { type = "bezier", points = { {0.65, 0.05}, {0.36, 1} } })
 hl.curve("linear", { type = "bezier", points = { {0, 0}, {1, 1} } })
