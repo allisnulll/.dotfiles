@@ -277,6 +277,14 @@ hl.window_rule({
 
     no_focus = true,
 })
+hl.window_rule({
+    name = "privacy-browsers-float",
+    match = { class = "^(Tor Browser|Mullvad Browser)$" },
+    float = true,
+    center = true,
+    fullscreen_state = "0 0",
+    suppress_event = "maximize",
+})
 
 hl.device({
     name = "dualsense-wireless-controller-touchpad",
