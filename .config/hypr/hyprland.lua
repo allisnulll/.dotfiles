@@ -22,9 +22,31 @@ local pickText = "grimblast --freeze save area /tmp/ocr.png && tesseract /tmp/oc
 local paper = "~/.config/hypr/scripts/hyprpaper.sh"
 local defaultPaper = "~/.config/hypr/scripts/hyprpaper.sh default"
 local dataStream = "~/.dotfiles/scripts/data-stream.sh"
--- TODO: Fix smart gaps and opacity scripts
--- local gaps = "~/.config/hypr/scripts/toggle-smart-gaps.sh"
--- local opacity = "~/.config/hypr/scripts/opacity-control.sh"
+
+function _G.low_power_mode(on)
+    if on == nil and hl.get_config("animations.enabled") == false or on == false then
+        hl.exec_cmd("hyprctl reload")
+        return
+    end
+
+    hl.config({
+        general = {
+            gaps_in = 0, gaps_out = 0,
+            border_size = 0,
+        },
+
+        animations = {
+            enabled = false,
+        },
+
+        decoration = {
+            shadow = { enabled = false },
+            blur = { enabled = false },
+            rounding = 0,
+        }
+    })
+end
+hl.bind("SUPER + G", low_power_mode)
 
 hl.on("hyprland.start", function()
     hl.exec_cmd("systemctl --user start hyprpaper")
@@ -335,11 +357,6 @@ hl.bind("SUPER + B", function()
 
     apply_waybar_visibility(ws)
 end)
-
--- TODO: Fix smart gaps and opacity scripts
--- hl.bind("SUPER + G", hl.dsp.exec_cmd(gaps))
--- hl.bind("SUPER + minus", hl.dsp.exec_cmd(opacity .. "decrease"))
--- hl.bind("SUPER + equal", hl.dsp.exec_cmd(opacity .. "increase"))
 
 hl.bind("SUPER + I", hl.dsp.focus({ workspace = "previous" }))
 hl.bind("SUPER + CTRL + I", hl.dsp.workspace.swap_monitors({ monitor1 = "DP-1", monitor2 = "HDMI-A-1" }))
