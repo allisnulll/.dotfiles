@@ -23,6 +23,37 @@ local paper = "~/.config/hypr/scripts/hyprpaper.sh"
 local defaultPaper = "~/.config/hypr/scripts/hyprpaper.sh default"
 local dataStream = "~/.dotfiles/scripts/data-stream.sh"
 
+local nogaps_workspaces = {}
+local function toggle_gaps()
+    local ws = hl.get_active_special_workspace() or hl.get_active_workspace()
+    if ws == nil then
+        hl.notification.create({ text = "Hyprland: Error getting active workspace", timeout = 5000, icon = "error", font_size = 20, })
+        return
+    end
+
+    local rule = nogaps_workspaces[ws.addressable_name]
+    if rule == nil then
+        local selector = ws.addressable_name
+        if not ws.special and ws.id ~= nil then
+            selector = string.format("r[%d-%d]s[false]", ws.id, ws.id)
+        end
+
+        rule = hl.workspace_rule({
+            workspace = selector,
+            gaps_in = 0,
+            gaps_out = 0,
+            border_size = 0,
+            no_border = true,
+            no_rounding = true,
+            enabled = false,
+        })
+        nogaps_workspaces[ws.addressable_name] = rule
+    end
+
+    rule:set_enabled(not rule:is_enabled())
+end
+hl.bind("SUPER + G", toggle_gaps)
+
 function _G.low_power_mode(on)
     if on == nil and hl.get_config("animations.enabled") == false or on == false then
         hl.exec_cmd("hyprctl reload")
@@ -34,11 +65,9 @@ function _G.low_power_mode(on)
             gaps_in = 0, gaps_out = 0,
             border_size = 0,
         },
-
         animations = {
             enabled = false,
         },
-
         decoration = {
             shadow = { enabled = false },
             blur = { enabled = false },
@@ -46,7 +75,7 @@ function _G.low_power_mode(on)
         }
     })
 end
-hl.bind("SUPER + G", low_power_mode)
+hl.bind("SUPER + SHIFT + G", low_power_mode)
 
 hl.on("hyprland.start", function()
     hl.exec_cmd("systemctl --user start hyprpaper")
