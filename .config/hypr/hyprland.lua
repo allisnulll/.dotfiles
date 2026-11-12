@@ -77,6 +77,41 @@ function _G.low_power_mode(on)
 end
 hl.bind("SUPER + SHIFT + G", low_power_mode)
 
+local window_opacity = {}
+local function set_window_opacity(delta)
+    local w = hl.get_active_window()
+    if w == nil then
+        hl.notification.create({ text = "Hyprland: Error getting active window", timeout = 5000, icon = "error", font_size = 20, })
+        return
+    end
+
+    local current = window_opacity[w.address] or 1
+    local next_opacity
+    if delta == nil then
+        next_opacity = 1
+    else
+        next_opacity = math.max(0.1, math.min(1, current + delta))
+    end
+    next_opacity = tonumber(string.format("%.2f", next_opacity))
+
+    window_opacity[w.address] = next_opacity
+    hl.dispatch(hl.dsp.window.set_prop({ window = w, prop = "opacity", value = string.format("%.2f", next_opacity) }))
+    hl.dispatch(hl.dsp.window.set_prop({ window = w, prop = "no_blur", value = tostring(next_opacity < 1) }))
+end
+
+local function forget_window_opacity(w)
+    if w ~= nil and w.address ~= nil then
+        window_opacity[w.address] = nil
+    end
+end
+
+hl.on("window.close", forget_window_opacity)
+hl.on("window.destroy", forget_window_opacity)
+
+hl.bind("SUPER + equal", function() set_window_opacity(0.05) end)
+hl.bind("SUPER + minus", function() set_window_opacity(-0.05) end)
+hl.bind("SUPER + SHIFT + equal", function() set_window_opacity(nil) end)
+
 hl.on("hyprland.start", function()
     hl.exec_cmd("systemctl --user start hyprpaper")
     hl.exec_cmd("systemctl --user start hypridle")
