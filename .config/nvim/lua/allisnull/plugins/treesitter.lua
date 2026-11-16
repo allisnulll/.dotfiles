@@ -24,6 +24,7 @@ return {
             "query",
             "scheme",
             "commonlisp",
+            "vhdl",
         })
 
         vim.api.nvim_create_autocmd("FileType", {
