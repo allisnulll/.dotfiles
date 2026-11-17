@@ -209,8 +209,8 @@ vim.keymap.set("v", "<leader>S", "y?\\V<C-r>=substitute(escape(@\", '\\/'), '\\n
 
 vim.keymap.set({ "n", "v" }, "g/", "/\\v^((.**)@!.)*$" .. string.rep("<Left>", 8), { desc = "Inverse Search" })
 
-vim.keymap.set("n", "<C-w><C-x>", ":tabc<CR>", { desc = "Close current tab" })
-vim.keymap.set("n", "<C-w><C-o>", ":tabo<CR>", { desc = "Close all other tabs" })
+vim.keymap.set({ "n", "v" }, "<C-w><C-x>", ":tabc<CR>", { desc = "Close current tab" })
+vim.keymap.set({"n", "v" }, "<C-w><C-o>", ":tabo<CR>", { desc = "Close all other tabs" })
 
 vim.keymap.set("n", "<C-Down>", "<C-w>j")
 vim.keymap.set("n", "<C-Up>", "<C-w>k")

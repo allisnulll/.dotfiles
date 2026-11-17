@@ -343,8 +343,8 @@ vim.keymap.set("v", "<leader>qz", function() visual_macro("z") end, { desc = "@z
 -- Tabs
 vim.keymap.set({ "n", "i", "v" }, "<C-S-PageUp>", function() vim.cmd("tabm +") end, { desc = "Move tab left" })
 vim.keymap.set({ "n", "i", "v" }, "<C-S-PageDown>", function() vim.cmd("tabm -") end, { desc = "Move tab right" })
-vim.keymap.set({ "n", "i", "v" }, "<C-w><C-x>", ":tabc<CR>", { desc = "Close current tab" })
-vim.keymap.set({ "n", "i", "v" }, "<C-w><C-o>", ":tabo<CR>", { desc = "Close all other tabs" })
+vim.keymap.set({ "n", "v" }, "<C-w><C-x>", ":tabc<CR>", { desc = "Close current tab" })
+vim.keymap.set({ "n", "v" }, "<C-w><C-o>", ":tabo<CR>", { desc = "Close all other tabs" })
 
 -- Switch Windows with Arrow Keys
 vim.keymap.set("n", "<C-Left>", "<C-w>h")
