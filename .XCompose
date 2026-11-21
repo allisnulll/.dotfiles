@@ -1,25 +1,27 @@
 # Custom
-<Multi_key> <s> <a> : "ₐ" U2090 # SUBSCRIPT LATIN SMALL LETTER A
-<Multi_key> <s> <e> : "ₑ" U2091 # SUBSCRIPT LATIN SMALL LETTER E
-<Multi_key> <s> <h> : "ₕ" U2095 # SUBSCRIPT LATIN SMALL LETTER H
-<Multi_key> <s> <i> : "ᵢ" U1D62 # SUBSCRIPT LATIN SMALL LETTER I
-<Multi_key> <s> <k> : "ₖ" U2096 # SUBSCRIPT LATIN SMALL LETTER K
-<Multi_key> <s> <l> : "ₗ" U2097 # SUBSCRIPT LATIN SMALL LETTER L
-<Multi_key> <s> <m> : "ₙ" U2098 # SUBSCRIPT LATIN SMALL LETTER M
-<Multi_key> <s> <n> : "ₙ" U2099 # SUBSCRIPT LATIN SMALL LETTER N
-<Multi_key> <s> <o> : "ₒ" U2092 # SUBSCRIPT LATIN SMALL LETTER O
-<Multi_key> <s> <p> : "ₚ" U209A # SUBSCRIPT LATIN SMALL LETTER P
-<Multi_key> <s> <r> : "ᵣ" U1D63 # SUBSCRIPT LATIN SMALL LETTER R
-<Multi_key> <s> <s> : "ₛ" U209B # SUBSCRIPT LATIN SMALL LETTER S
-<Multi_key> <s> <t> : "ₜ" U209C # SUBSCRIPT LATIN SMALL LETTER T
-<Multi_key> <s> <u> : "ᵤ" U1D64 # SUBSCRIPT LATIN SMALL LETTER U
-<Multi_key> <s> <v> : "ᵥ" U1D65 # SUBSCRIPT LATIN SMALL LETTER V
-<Multi_key> <s> <x> : "ₓ" U2093 # SUBSCRIPT LATIN SMALL LETTER X
-<Multi_key> <m> <less> : "⟨" U27E8 # MATHEMATICAL LEFT ANGLE BRACKET
+<Multi_key> <s> <a>       : "ₐ" U2090 # SUBSCRIPT LATIN SMALL LETTER A
+<Multi_key> <s> <e>       : "ₑ" U2091 # SUBSCRIPT LATIN SMALL LETTER E
+<Multi_key> <s> <h>       : "ₕ" U2095 # SUBSCRIPT LATIN SMALL LETTER H
+<Multi_key> <s> <i>       : "ᵢ" U1D62 # SUBSCRIPT LATIN SMALL LETTER I
+<Multi_key> <s> <k>       : "ₖ" U2096 # SUBSCRIPT LATIN SMALL LETTER K
+<Multi_key> <s> <l>       : "ₗ" U2097 # SUBSCRIPT LATIN SMALL LETTER L
+<Multi_key> <s> <m>       : "ₙ" U2098 # SUBSCRIPT LATIN SMALL LETTER M
+<Multi_key> <s> <n>       : "ₙ" U2099 # SUBSCRIPT LATIN SMALL LETTER N
+<Multi_key> <s> <o>       : "ₒ" U2092 # SUBSCRIPT LATIN SMALL LETTER O
+<Multi_key> <s> <p>       : "ₚ" U209A # SUBSCRIPT LATIN SMALL LETTER P
+<Multi_key> <s> <r>       : "ᵣ" U1D63 # SUBSCRIPT LATIN SMALL LETTER R
+<Multi_key> <s> <s>       : "ₛ" U209B # SUBSCRIPT LATIN SMALL LETTER S
+<Multi_key> <s> <t>       : "ₜ" U209C # SUBSCRIPT LATIN SMALL LETTER T
+<Multi_key> <s> <u>       : "ᵤ" U1D64 # SUBSCRIPT LATIN SMALL LETTER U
+<Multi_key> <s> <v>       : "ᵥ" U1D65 # SUBSCRIPT LATIN SMALL LETTER V
+<Multi_key> <s> <x>       : "ₓ" U2093 # SUBSCRIPT LATIN SMALL LETTER X
+<Multi_key> <m> <less>    : "⟨" U27E8 # MATHEMATICAL LEFT ANGLE BRACKET
 <Multi_key> <m> <greater> : "⟩" U27E9 # MATHEMATICAL RIGHT ANGLE BRACKET
-<Multi_key> <m> <e> : "∃" U2203 # MATHEMATICAL THERE EXISTS
-<Multi_key> <m> <e> : "∄" U2204 # MATHEMATICAL THERE DOES NOT EXIST
-<Multi_key> <m> <a> : "∀" U2200 # MATHEMATICAL FOR ALL
+<Multi_key> <m> <e>       : "∃" U2203 # MATHEMATICAL THERE EXISTS
+<Multi_key> <m> <E>       : "∄" U2204 # MATHEMATICAL THERE DOES NOT EXIST
+<Multi_key> <m> <a>       : "∀" U2200 # MATHEMATICAL FOR ALL
+<Multi_key> <m> <m>       : "⋅" U22C5 # MATHEMATICAL DOT OPERATOR
+<Multi_key> <m> <x>       : "⊕" U2295 # MATHEMATICAL CIRCLED PLUS OPERATOR
 
 # UTF-8 (Unicode) Compose sequences
 #
